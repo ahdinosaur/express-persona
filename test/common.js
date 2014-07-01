@@ -1,5 +1,8 @@
 var async = require("async"),
     express = require("express"),
+    bodyParser = require("body-parser"),
+    cookieParser = require("cookie-parser"),
+    session = require("express-session"),
     request = require("request");
 
 var email, password, q;
@@ -36,9 +39,9 @@ module.exports = {
   createServer: function createServer(options, callback) {
     var app = express();
 
-    app.use(express.json())
-      .use(express.cookieParser())
-      .use(express.session({
+    app.use(bodyParser.json())
+      .use(cookieParser())
+      .use(session({
         secret: "blah"
       }));
 

@@ -1,6 +1,7 @@
 "use strict";
 
 var connect = require("connect"),
+    body = require("body-parser"),
     browseridVerify = require("browserid-verify");
 
 var defaultOptions = {
@@ -49,7 +50,7 @@ module.exports = function(app, options) {
     url: personaOpts.verifierURI
   });
 
-  app.post(personaOpts.verifyPath, connect.json(), connect.urlencoded(), personaOpts.middleware, function(req, res) {
+  app.post(personaOpts.verifyPath, body.json(), body.urlencoded(), personaOpts.middleware, function(req, res) {
     // If the body can't be parsed then we can't get the assertion
     if (!req.body) {
       personaOpts.verifyResponse("Server-side exception", req, res);
